@@ -10,8 +10,12 @@ const initialState = {
 const contentReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_TODO_ITEM:
+            var date = new Date();
+            date = date.toLocaleString('en-US');
             const addToDoListItems = [...state.toDoListItems];
-            addToDoListItems.push(action.payload);
+            const newData = {...action.payload, ...{itemCreateTime: date,itemCompletionTime:""}};
+            addToDoListItems.push(newData);
+            
             return {
                 ...state,
                 toDoListItems: addToDoListItems,

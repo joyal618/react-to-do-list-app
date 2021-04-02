@@ -14,7 +14,6 @@ function ListTodo(props) {
 
     return (
         <div className="list-items-main-container">
-            {console.log(props)}
             <MaterialTable
                 title="ToDo Items"
                 columns={columns}
@@ -44,7 +43,23 @@ function ListTodo(props) {
                             }, 1000)
                         }),
                 }}
-
+                
+                actions={[
+                    {
+                        icon: 'doneall',
+                        tooltip: 'Task Completed',
+                        onClick: (event, rowData) =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    const index = rowData.tableData.id;
+                                    console.log("dasd",index);
+                                    props.item.updateTime(index);
+                                    resolve()
+                                }, 1000)
+                            }),
+                    }
+                ]}
+            
             />
         </div>
     );

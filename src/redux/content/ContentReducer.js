@@ -1,6 +1,7 @@
 import { ADD_TODO_ITEM } from "./ContentTypes";
 import { DELETE_TODO_ITEM } from "./ContentTypes";
 import { UPDATE_TODO_ITEM } from "./ContentTypes";
+import { UPDATE_TIME } from "./ContentTypes";
 
 
 const initialState = {
@@ -13,9 +14,9 @@ const contentReducer = (state = initialState, action) => {
             var date = new Date();
             date = date.toLocaleString('en-US');
             const addToDoListItems = [...state.toDoListItems];
-            const newData = {...action.payload, ...{itemCreateTime: date,itemCompletionTime:""}};
+            const newData = { ...action.payload, ...{ itemCreateTime: date, itemCompletionTime: "" } };
             addToDoListItems.push(newData);
-            
+
             return {
                 ...state,
                 toDoListItems: addToDoListItems,
@@ -28,13 +29,26 @@ const contentReducer = (state = initialState, action) => {
                 toDoListItems: deleteToDoListItems,
             }
 
-            case UPDATE_TODO_ITEM:
-                const updateToDoListItems = [...state.toDoListItems];
-                updateToDoListItems[action.index] = action.payload;
-                return {
-                    ...state,
-                    toDoListItems: updateToDoListItems,
-                }
+        case UPDATE_TODO_ITEM:
+            const updateToDoListItems = [...state.toDoListItems];
+            updateToDoListItems[action.index] = action.payload;
+            return {
+                ...state,
+                toDoListItems: updateToDoListItems,
+            }
+
+        case UPDATE_TIME:
+            var date = new Date();
+            date = date.toLocaleString('en-US');
+            const updateTime = [...state.toDoListItems];
+            updateTime[action.index].itemCompletionTime = date;
+            console.log("Cm",updateTime[action.index].itemCompletionTime);
+            // updateTime[action.index] = action.payload;
+            return {
+                ...state,
+                toDoListItems: updateTime,
+            }
+
 
 
         default: return state;

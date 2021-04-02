@@ -3,6 +3,7 @@ import "./Home.css";
 import { addToDoListItems } from '../../redux';
 import { deleteToDoListItems } from '../../redux';
 import { updateToDoListItems } from '../../redux';
+import { updateTime } from '../../redux';
 import { connect } from 'react-redux';
 import ListTodo from "../list-todo/ListTodo";
 
@@ -32,6 +33,7 @@ const mapDispatchToProps = dispatch => {
         addToDoListItems: (payload) => dispatch(addToDoListItems(payload)),
         deleteToDoListItems: (payload,index) => dispatch(deleteToDoListItems(payload,index)),
         updateToDoListItems: (index) => dispatch(updateToDoListItems(index)),
+        updateTime: (index) => dispatch(updateTime(index)),
     }
 }
 
